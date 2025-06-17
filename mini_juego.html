@@ -1,241 +1,244 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Granjera en Camino</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-        
-        #gameContainer {
-            position: relative;
-            width: 400px;
-            height: 200px;
-            background-color: #87CEEB; /* Cielo */
-            overflow: hidden;
-            border: 4px solid #000;
-        }
-        
-        #ground {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 50px;
-            background-color: #8B4513; /* Camino de tierra */
-        }
-        
-        #farmer {
-            position: absolute;
-            bottom: 50px;
-            left: 50px;
-            width: 20px;
-            height: 30px;
-            background-color: #FF6347; /* Color de la granjera */
-            z-index: 10;
-        }
-        
-        .obstacle {
-            position: absolute;
-            bottom: 50px;
-            width: 15px;
-            height: 20px;
-            background-color: #228B22; /* Color de obstáculos */
-        }
-        
-        #farm {
-            position: absolute;
-            right: 0;
-            bottom: 30px;
-            width: 40px;
-            height: 40px;
-            background-color: #CD853F; /* Granja */
-            z-index: 5;
-        }
-        
-        #score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 16px;
-            color: #000;
-        }
-        
-        #startScreen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            z-index: 20;
-        }
-        
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Granjera en Camino</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #c4f4e0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #gameContainer {
+      position: relative;
+      width: 600px;
+      height: 250px;
+      background: linear-gradient(to top, #87ceeb 60%, #c4f4e0 100%);
+      border: 4px solid #2d5016;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    #ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      background: repeating-linear-gradient(
+        -45deg,
+        #8b4513,
+        #8b4513 10px,
+        #a0522d 10px,
+        #a0522d 20px
+      );
+    }
+
+    #farmer {
+      position: absolute;
+      bottom: 50px;
+      left: 50px;
+      width: 30px;
+      height: 40px;
+      background-color: #f5a623;
+      border: 2px solid #444;
+      border-radius: 5px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    .obstacle {
+      position: absolute;
+      bottom: 50px;
+      width: 20px;
+      height: 25px;
+      background-color: #2e8b57;
+      border-radius: 4px;
+      border: 1px solid #1f4d2e;
+    }
+
+    #farm {
+      position: absolute;
+      right: 0;
+      bottom: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: #deb887;
+      border: 3px solid #8b4513;
+      border-radius: 5px;
+    }
+
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-weight: bold;
+      color: #333;
+      background: rgba(255,255,255,0.7);
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+
+    #startScreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      z-index: 10;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
 </head>
 <body>
-    <div id="gameContainer">
-        <div id="ground"></div>
-        <div id="farmer"></div>
-        <div id="farm"></div>
-        <div id="score">Puntuación: 0</div>
-        <div id="startScreen">
-            <h1>Granjera en Camino</h1>
-            <p>Usa las teclas LEFT y RIGHT para mover a la granjera</p>
-            <p>Esquiva los obstáculos y llega a la granja</p>
-            <button onclick="startGame()">Comenzar</button>
-        </div>
+  <div id="gameContainer">
+    <div id="ground"></div>
+    <div id="farmer"></div>
+    <div id="farm"></div>
+    <div id="score">Puntuación: 0</div>
+    <div id="startScreen">
+      <h1>🎮 Granjera en Camino</h1>
+      <p>Usa las flechas ⬅️ ➡️ para mover a la granjera</p>
+      <p>Evita obstáculos y llega a tu granja</p>
+      <button onclick="startGame()">Comenzar</button>
     </div>
+  </div>
 
-    <script>
-        const farmer = document.getElementById('farmer');
-        const gameContainer = document.getElementById('gameContainer');
-        const startScreen = document.getElementById('startScreen');
-        const scoreElement = document.getElementById('score');
-        
-        let farmerX = 50;
-        let farmerSpeed = 0;
-        let obstacles = [];
-        let score = 0;
-        let gameRunning = false;
-        let gameLoop;
-        
-        function startGame() {
-            startScreen.style.display = 'none';
-            farmerX = 50;
-            farmer.style.left = farmerX + 'px';
-            obstacles = [];
-            score = 0;
-            scoreElement.textContent = 'Puntuación: ' + score;
-            gameRunning = true;
-            
-            // Limpiar obstáculos existentes
-            document.querySelectorAll('.obstacle').forEach(obs => obs.remove());
-            
-            gameLoop = setInterval(updateGame, 20);
-            spawnObstacle();
+  <script>
+    const farmer = document.getElementById('farmer');
+    const gameContainer = document.getElementById('gameContainer');
+    const startScreen = document.getElementById('startScreen');
+    const scoreElement = document.getElementById('score');
+
+    let farmerX = 50;
+    let farmerSpeed = 0;
+    let obstacles = [];
+    let score = 0;
+    let gameRunning = false;
+    let gameLoop;
+
+    function startGame() {
+      startScreen.style.display = 'none';
+      farmerX = 50;
+      farmer.style.left = farmerX + 'px';
+      obstacles = [];
+      score = 0;
+      scoreElement.textContent = 'Puntuación: ' + score;
+      gameRunning = true;
+
+      document.querySelectorAll('.obstacle').forEach(obs => obs.remove());
+
+      gameLoop = setInterval(updateGame, 20);
+      spawnObstacle();
+    }
+
+    function updateGame() {
+      farmerX += farmerSpeed;
+
+      if (farmerX < 0) farmerX = 0;
+      if (farmerX > gameContainer.offsetWidth - farmer.offsetWidth) {
+        farmerX = gameContainer.offsetWidth - farmer.offsetWidth;
+
+        if (gameRunning) {
+          gameRunning = false;
+          clearInterval(gameLoop);
+          score += 100;
+          scoreElement.textContent = 'Puntuación: ' + score;
+          startScreen.innerHTML = `
+            <h1>🏡 ¡Felicidades!</h1>
+            <p>Puntuación final: ${score}</p>
+            <button onclick="startGame()">Jugar de nuevo</button>
+          `;
+          startScreen.style.display = 'flex';
         }
-        
-        function updateGame() {
-            // Mover granjera
-            farmerX += farmerSpeed;
-            
-            // Limitar movimiento dentro del contenedor
-            if (farmerX < 0) farmerX = 0;
-            if (farmerX > gameContainer.offsetWidth - farmer.offsetWidth) {
-                farmerX = gameContainer.offsetWidth - farmer.offsetWidth;
-                
-                // Llegó a la granja
-                if (gameRunning) {
-                    gameRunning = false;
-                    clearInterval(gameLoop);
-                    score += 100;
-                    scoreElement.textContent = 'Puntuación: ' + score;
-                    startScreen.style.display = 'flex';
-                    startScreen.innerHTML = `
-                        <h1>¡Felicidades!</h1>
-                        <p>Puntuación final: ${score}</p>
-                        <button onclick="startGame()">Jugar de nuevo</button>
-                    `;
-                }
-            }
-            
-            farmer.style.left = farmerX + 'px';
-            
-            // Mover obstáculos
-            obstacles.forEach((obstacle, index) => {
-                const obstacleElement = obstacle.element;
-                let obstacleX = obstacle.x;
-                
-                obstacleX -= 3; // Velocidad del obstáculo
-                obstacle.x = obstacleX;
-                obstacleElement.style.left = obstacleX + 'px';
-                
-                // Detectar colisión
-                if (
-                    farmerX < obstacleX + obstacleElement.offsetWidth &&
-                    farmerX + farmer.offsetWidth > obstacleX &&
-                    30 < 50 // Simple detección de altura (podría mejorarse)
-                ) {
-                    // Colisión detectada
-                    gameRunning = false;
-                    clearInterval(gameLoop);
-                    startScreen.style.display = 'flex';
-                    startScreen.innerHTML = `
-                        <h1>¡Game Over!</h1>
-                        <p>Puntuación: ${score}</p>
-                        <button onclick="startGame()">Reintentar</button>
-                    `;
-                }
-                
-                // Eliminar obstáculo si sale de la pantalla
-                if (obstacleX < -obstacleElement.offsetWidth) {
-                    obstacleElement.remove();
-                    obstacles.splice(index, 1);
-                    score += 10;
-                    scoreElement.textContent = 'Puntuación: ' + score;
-                }
-            });
+      }
+
+      farmer.style.left = farmerX + 'px';
+
+      obstacles.forEach((obstacle, index) => {
+        const el = obstacle.element;
+        obstacle.x -= 3;
+        el.style.left = obstacle.x + 'px';
+
+        if (
+          farmerX < obstacle.x + el.offsetWidth &&
+          farmerX + farmer.offsetWidth > obstacle.x
+        ) {
+          gameRunning = false;
+          clearInterval(gameLoop);
+          startScreen.innerHTML = `
+            <h1>💥 ¡Game Over!</h1>
+            <p>Puntuación: ${score}</p>
+            <button onclick="startGame()">Reintentar</button>
+          `;
+          startScreen.style.display = 'flex';
         }
-        
-        function spawnObstacle() {
-            if (!gameRunning) return;
-            
-            const obstacle = document.createElement('div');
-            obstacle.className = 'obstacle';
-            gameContainer.appendChild(obstacle);
-            
-            const obstacleX = gameContainer.offsetWidth;
-            const obstacleY = 0;
-            
-            obstacle.style.left = obstacleX + 'px';
-            
-            obstacles.push({
-                element: obstacle,
-                x: obstacleX
-            });
-            
-            // Generar nuevo obstáculo después de un tiempo aleatorio
-            const randomTime = Math.floor(Math.random() * 2000) + 1000;
-            setTimeout(spawnObstacle, randomTime);
+
+        if (obstacle.x < -el.offsetWidth) {
+          el.remove();
+          obstacles.splice(index, 1);
+          score += 10;
+          scoreElement.textContent = 'Puntuación: ' + score;
         }
-        
-        // Controles de teclado
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') {
-                farmerSpeed = 3;
-            } else if (e.key === 'ArrowLeft') {
-                farmerSpeed = -3;
-            }
-        });
-        
-        document.addEventListener('keyup', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                farmerSpeed = 0;
-            }
-        });
-    </script>
+      });
+    }
+
+    function spawnObstacle() {
+      if (!gameRunning) return;
+
+      const obstacle = document.createElement('div');
+      obstacle.className = 'obstacle';
+      gameContainer.appendChild(obstacle);
+
+      const obstacleX = gameContainer.offsetWidth;
+      obstacle.style.left = obstacleX + 'px';
+
+      obstacles.push({ element: obstacle, x: obstacleX });
+
+      const randomTime = Math.random() * 2000 + 1000;
+      setTimeout(spawnObstacle, randomTime);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        farmerSpeed = 3;
+      } else if (e.key === 'ArrowLeft') {
+        farmerSpeed = -3;
+      }
+    });
+
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        farmerSpeed = 0;
+      }
+    });
+  </script>
 </body>
 </html>
