@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Gratuito - AgroRaíz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #2d5a27;
+        }
+
+        .logo::before {
+            content: "🌱";
+            font-size: 2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .plan-badge {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .upgrade-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .upgrade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            color: #2d5a27;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d5a27;
+        }
+
+        .recommendation-item {
+            background: #f8f9ff;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4facfe;
+        }
+
+        .alert-item {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-urgent {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .activity-log {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            padding: 0.8rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .content-item {
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .content-item:hover {
+            border-color: #4facfe;
+            transform: scale(1.02);
+        }
+
+        .content-type {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .premium-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .locked-card:hover .premium-overlay {
+            opacity: 1;
+        }
+
+        .lock-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .weather-widget {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+
+        .weather-main {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .weather-temp {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">AgroRaíz</div>
+            <div class="user-info">
+                <span class="plan-badge">Plan Gratuito</span>
+                <button class="upgrade-btn" onclick="upgradeToPremium()">¡Actualizar a Premium!</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1 class="welcome-title">¡Bienvenido a AgroRaíz! 🌱</h1>
+            <p class="welcome-subtitle">Transforma tu agricultura con prácticas regenerativas. Produce más, impacta menos.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Recomendaciones Personalizadas -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">💡</span>
+                    <h3 class="card-title">Recomendaciones Personalizadas</h3>
+                </div>
+                <div class="recommendation-item">
+                    <strong>Mejora del Suelo:</strong> Considera implementar cultivos de cobertura para aumentar la materia orgánica en un 15% este año.
+                </div>
+                <div class="recommendation-item">
+                    <strong>Rotación de Cultivos:</strong> Para tu próxima temporada, recomendamos alternar con leguminosas para fijar nitrógeno naturalmente.
+                </div>
+                <div class="recommendation-item">
+                    <strong>Agua Eficiente:</strong> Implementa riego por goteo en las zonas de mayor pendiente para reducir erosión.
+                </div>
+            </div>
+
+            <!-- Alertas Climáticas -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">🌦️</span>
+                    <h3 class="card-title">Alertas Climáticas</h3>
+                </div>
+                <div class="weather-widget">
+                    <div>
+                        <div class="weather-main">Parcialmente Nublado</div>
+                        <div style="font-size: 0.9rem;">Antofagasta, Chile</div>
+                    </div>
+                    <div class="weather-temp">22°C</div>
+                </div>
+                <div class="alert-item">
+                    <span>⚠️</span>
+                    <span>Posible helada en 3 días - Prepara protección para cultivos sensibles</span>
+                </div>
+                <div class="alert-item alert-urgent">
+                    <span>🔴</span>
+                    <span>Alerta de viento fuerte mañana - Asegura estructuras y tutorados</span>
+                </div>
+            </div>
+
+            <!-- Registro de Prácticas -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">📝</span>
+                    <h3 class="card-title">Registro de Prácticas</h3>
+                </div>
+                <div class="activity-log">
+                    <div class="activity-item">
+                        <span>Siembra de tomates - Sector A</span>
+                        <span class="activity-date">Hace 2 días</span>
+                    </div>
+                    <div class="activity-item">
+                        <span>Riego por aspersión - Todo el predio</span>
+                        <span class="activity-date">Hace 3 días</span>
+                    </div>
+                    <div class="activity-item">
+                        <span>Aplicación compost orgánico</span>
+                        <span class="activity-date">Hace 1 semana</span>
+                    </div>
+                    <div class="activity-item">
+                        <span>Control manual de malezas</span>
+                        <span class="activity-date">Hace 1 semana</span>
+                    </div>
+                </div>
+                <button style="width: 100%; margin-top: 1rem; padding: 0.8rem; background: #4facfe; color: white; border: none; border-radius: 10px; cursor: pointer;" onclick="addActivity()">+ Registrar nueva actividad</button>
+            </div>
+
+            <!-- Educación y Contenido -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">🎓</span>
+                    <h3 class="card-title">Educación y Contenido</h3>
+                </div>
+                <div class="content-grid">
+                    <div class="content-item" onclick="openContent('video1')">
+                        <div class="content-type">📹 Video</div>
+                        <strong>Introducción a la Agricultura Regenerativa</strong>
+                        <div style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">5 min • Principios básicos</div>
+                    </div>
+                    <div class="content-item" onclick="openContent('infographic1')">
+                        <div class="content-type">📊 Infografía</div>
+                        <strong>Salud del Suelo en 5 Pasos</strong>
+                        <div style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">Guía visual práctica</div>
+                    </div>
+                    <div class="content-item" onclick="openContent('article1')">
+                        <div class="content-type">📄 Artículo</div>
+                        <strong>Rotación de Cultivos Efectiva</strong>
+                        <div style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">10 min de lectura</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Funciones Premium (Bloqueadas) -->
+            <div class="card locked-card" style="position: relative;">
+                <div class="card-header">
+                    <span class="card-icon">🛰️</span>
+                    <h3 class="card-title">Monitoreo Satelital</h3>
+                </div>
+                <div style="opacity: 0.3;">
+                    <p>Vista satelital de tus cultivos en tiempo real</p>
+                    <div style="background: #f0f0f0; height: 150px; border-radius: 10px; margin: 1rem 0;"></div>
+                    <p>Detección temprana de problemas y análisis de salud vegetal</p>
+                </div>
+                <div class="premium-overlay">
+                    <div class="lock-icon">🔒</div>
+                    <h4>Función Premium</h4>
+                    <p>Accede al monitoreo satelital completo</p>
+                    <button class="upgrade-btn" style="margin-top: 1rem;" onclick="upgradeToPremium()">Actualizar Plan</button>
+                </div>
+            </div>
+
+            <div class="card locked-card" style="position: relative;">
+                <div class="card-header">
+                    <span class="card-icon">📋</span>
+                    <h3 class="card-title">Informes Técnicos</h3>
+                </div>
+                <div style="opacity: 0.3;">
+                    <p>Reportes personalizados basados en datos</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%;"></div>
+                    </div>
+                    <p>Optimización de recursos y productividad</p>
+                </div>
+                <div class="premium-overlay">
+                    <div class="lock-icon">🔒</div>
+                    <h4>Función Premium</h4>
+                    <p>Recibe informes técnicos detallados</p>
+                    <button class="upgrade-btn" style="margin-top: 1rem;" onclick="upgradeToPremium()">Actualizar Plan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function upgradeToPremium() {
+            alert('¡Descubre todo el potencial de AgroRaíz con nuestro plan Premium! Contacta con nuestro equipo para más información.');
+        }
+
+        function addActivity() {
+            const activity = prompt('¿Qué actividad realizaste?');
+            if (activity) {
+                const activityLog = document.querySelector('.activity-log');
+                const newActivity = document.createElement('div');
+                newActivity.className = 'activity-item';
+                newActivity.innerHTML = `
+                    <span>${activity}</span>
+                    <span class="activity-date">Ahora</span>
+                `;
+                activityLog.insertBefore(newActivity, activityLog.firstChild);
+            }
+        }
+
+        function openContent(contentId) {
+            const contents = {
+                'video1': 'Reproduciendo: Introducción a la Agricultura Regenerativa',
+                'infographic1': 'Abriendo: Infografía - Salud del Suelo en 5 Pasos',
+                'article1': 'Leyendo: Rotación de Cultivos Efectiva'
+            };
+            alert(contents[contentId] || 'Cargando contenido...');
+        }
+
+        // Animación de las tarjetas al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+</body>
+</html>
