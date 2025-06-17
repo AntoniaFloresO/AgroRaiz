@@ -850,10 +850,16 @@
                             <li>Completa tu perfil agrícola</li>
                             <li>Comienza a recibir recomendaciones personalizadas</li>
                         </ul>
-                        <button class="modal-button" onclick="closeModal('freeModal')">Cerrar</button>
-                    </div>
-                `;
-            }, 1000);
+                        // Mostrar mensaje de éxito y redirigir
+                        modalContent.innerHTML = `
+                          <div class="success-message">
+                              <h2>🎉 ¡Bienvenido a AgroRaíz!</h2>
+                              <p>Redirigiendo a tu panel en 3 segundos...</p>
+                          </div>
+                        `;
+                        setTimeout(() => {
+                            window.location.href = "free-dashboard.html";
+                        }, 300
             
             // Show loading state
             const submitButton = this.querySelector('button[type="submit"]');
@@ -888,10 +894,15 @@
                             <li>Un técnico te contactará en 24-48 horas</li>
                             <li>Programaremos una sesión de configuración personalizada</li>
                         </ul>
-                        <button class="modal-button" onclick="closeModal('premiumModal')">Cerrar</button>
-                    </div>
-                `;
-            }, 1000);
+                        modalContent.innerHTML = `
+                          <div class="success-message">
+                              <h2>🚀 ¡Prueba Premium Activada!</h2>
+                              <p>Redirigiendo a tu panel en 3 segundos...</p>
+                          </div>
+                        `;
+                        setTimeout(() => {
+                            window.location.href = "premium-dashboard.html";
+                        }, 3000);
             
             // Show loading state
             const submitButton = this.querySelector('button[type="submit"]');
