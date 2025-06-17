@@ -364,6 +364,8 @@
             text-align: center;
             position: relative;
             animation: modalSlideIn 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .close {
@@ -802,7 +804,7 @@
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto';
+            //ocument.body.style.overflow = 'auto';
         }
 
         // Close modal when clicking outside
