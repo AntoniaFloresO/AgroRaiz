@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de monitoreo satelital avanzado para agricultura de precisión">
     <title>AgroSmart Pro - Monitoreo Satelital Avanzado</title>
     <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --border-radius: 20px;
+            --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y estilos base */
         * {
             margin: 0;
             padding: 0;
@@ -13,39 +31,72 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
-            color: #333;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
+        /* Estructura principal */
         .container {
             max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        .header {
+        /* Componentes reutilizables */
+        .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
+            border-radius: var(--border-radius);
             padding: 2rem;
+            box-shadow: var(--box-shadow);
             margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-active {
+            background: linear-gradient(45deg, #27ae60, #219a52);
+        }
+
+        /* Header */
+        .header {
+            composes: card;
+            text-align: center;
         }
 
         .header h1 {
             font-size: 2.5rem;
-            color: #2c3e50;
-            text-align: center;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
 
         .header p {
-            text-align: center;
             font-size: 1.2rem;
-            color: #7f8c8d;
+            color: var(--text-light);
         }
 
+        /* Grid Layout */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -53,14 +104,7 @@
             margin-bottom: 2rem;
         }
 
-        .satellite-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
+        /* Sección Satelital */
         .satellite-header {
             display: flex;
             justify-content: space-between;
@@ -70,7 +114,7 @@
 
         .satellite-header h2 {
             font-size: 1.8rem;
-            color: #2c3e50;
+            color: var(--primary-color);
         }
 
         .satellite-controls {
@@ -78,26 +122,6 @@
             gap: 1rem;
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
-        }
-
-        .control-btn {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .control-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-        }
-
-        .control-btn.active {
-            background: linear-gradient(45deg, #27ae60, #219a52);
         }
 
         .satellite-view {
@@ -132,19 +156,25 @@
             border: 2px solid rgba(255, 255, 255, 0.8);
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            color: white;
+            color: var(--white);
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            flex-direction: column;
         }
 
         .zone:hover {
-            border-color: #fff;
+            border-color: var(--white);
             transform: scale(1.05);
             z-index: 10;
+        }
+
+        .zone small {
+            font-size: 0.8rem;
+            font-weight: normal;
         }
 
         .zone-a {
@@ -183,7 +213,7 @@
             position: absolute;
             width: 8px;
             height: 8px;
-            background: #3498db;
+            background: var(--secondary-color);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -216,22 +246,16 @@
         .metric-value {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--primary-color);
         }
 
         .metric-label {
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: var(--text-light);
             margin-top: 0.5rem;
         }
 
-        .weather-forecast {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-        }
-
+        /* Sección del Tiempo */
         .weather-header {
             display: flex;
             align-items: center;
@@ -241,7 +265,7 @@
 
         .weather-header h3 {
             font-size: 1.5rem;
-            color: #2c3e50;
+            color: var(--primary-color);
         }
 
         .forecast-grid {
@@ -253,7 +277,7 @@
 
         .forecast-day {
             background: linear-gradient(135deg, #74b9ff, #0984e3);
-            color: white;
+            color: var(--white);
             border-radius: 15px;
             padding: 1.5rem 1rem;
             text-align: center;
@@ -284,34 +308,7 @@
             opacity: 0.9;
         }
 
-        .alerts-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .alerts-panel {
-            margin-bottom: 2rem;
-        }
-
-        .notification-dot {
-            background: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            position: absolute;
-            top: -5px;
-            right: -10px;
-        }
-
+        /* Sección de Alertas */
         .alert-item {
             display: flex;
             align-items: center;
@@ -319,7 +316,7 @@
             padding: 1.5rem;
             margin-bottom: 1rem;
             border-radius: 12px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .alert-item:hover {
@@ -329,41 +326,35 @@
 
         .alert-critical {
             background: linear-gradient(135deg, #ff7675, #fd79a8);
-            color: white;
+            color: var(--white);
         }
 
         .alert-warning {
             background: linear-gradient(135deg, #fdcb6e, #f39c12);
-            color: white;
+            color: var(--white);
         }
 
         .alert-info {
             background: linear-gradient(135deg, #74b9ff, #0984e3);
-            color: white;
+            color: var(--white);
         }
 
         .alert-success {
             background: linear-gradient(135deg, #00b894, #00a085);
-            color: white;
+            color: var(--white);
         }
 
+        /* Sección de Mejoras */
         .improvement-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
 
-        .improvement-metrics {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-        }
-
         .metrics-header {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 1.5rem;
             text-align: center;
         }
@@ -379,7 +370,7 @@
             border-radius: 15px;
             padding: 1.5rem;
             text-align: center;
-            color: white;
+            color: var(--white);
             transition: transform 0.3s ease;
         }
 
@@ -398,30 +389,14 @@
             opacity: 0.9;
         }
 
-        .news-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-        }
-
-        .news-header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
+        /* Sección de Noticias */
         .news-item {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 1rem;
-            border-left: 4px solid #3498db;
-            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+            transition: var(--transition);
         }
 
         .news-item:hover {
@@ -431,12 +406,12 @@
 
         .news-title {
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
 
         .news-summary {
-            color: #7f8c8d;
+            color: var(--text-light);
             font-size: 0.9rem;
             line-height: 1.4;
         }
@@ -447,6 +422,7 @@
             margin-top: 0.5rem;
         }
 
+        /* Controles Avanzados */
         .advanced-controls {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -455,15 +431,13 @@
         }
 
         .control-panel {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
+            composes: card;
             padding: 1.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .control-panel h4 {
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 1rem;
             font-size: 1.1rem;
         }
@@ -483,11 +457,13 @@
             background: rgba(52, 152, 219, 0.1);
         }
 
-        .control-option input[type="checkbox"] {
+        .control-option input[type="checkbox"],
+        .control-option input[type="radio"] {
             width: 18px;
             height: 18px;
         }
 
+        /* Responsive Design */
         @media (max-width: 1200px) {
             .main-grid {
                 grid-template-columns: 1fr;
@@ -516,7 +492,7 @@
                 gap: 0.5rem;
             }
             
-            .control-btn {
+            .btn {
                 padding: 0.6rem 1rem;
             }
         }
@@ -525,10 +501,10 @@
 <body>
     <div class="container">
         <!-- Header -->
-        <div class="header">
+        <header class="header">
             <h1>🛰️ AgroSmart Pro</h1>
             <p>Monitoreo Satelital Avanzado para Agricultura de Precisión</p>
-        </div>
+        </header>
 
         <!-- Controles Avanzados -->
         <div class="advanced-controls">
@@ -594,19 +570,19 @@
         </div>
 
         <!-- Grid Principal -->
-        <div class="main-grid">
+        <main class="main-grid">
             <!-- Sección de Monitoreo Satelital -->
-            <div class="satellite-section">
+            <section class="card satellite-section">
                 <div class="satellite-header">
                     <h2>🛰️ Vista Satelital en Tiempo Real</h2>
-                    <span style="color: #27ae60; font-weight: bold;">● ACTIVO</span>
+                    <span style="color: var(--success-color); font-weight: bold;">● ACTIVO</span>
                 </div>
 
                 <div class="satellite-controls">
-                    <button class="control-btn active" onclick="changeView('ndvi')">NDVI</button>
-                    <button class="control-btn" onclick="changeView('rgb')">RGB Natural</button>
-                    <button class="control-btn" onclick="changeView('thermal')">Térmico</button>
-                    <button class="control-btn" onclick="changeView('moisture')">Humedad</button>
+                    <button class="btn btn-primary btn-active" onclick="changeView('ndvi')" aria-label="Ver vista NDVI">NDVI</button>
+                    <button class="btn btn-primary" onclick="changeView('rgb')" aria-label="Ver vista RGB Natural">RGB Natural</button>
+                    <button class="btn btn-primary" onclick="changeView('thermal')" aria-label="Ver vista Térmica">Térmico</button>
+                    <button class="btn btn-primary" onclick="changeView('moisture')" aria-label="Ver vista de Humedad">Humedad</button>
                 </div>
 
                 <div class="satellite-view">
@@ -662,13 +638,13 @@
                         <div class="metric-label">Precisión</div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Pronóstico del Tiempo -->
-            <div class="weather-forecast">
+            <section class="card weather-forecast">
                 <div class="weather-header">
                     <h3>🌤️ Pronóstico Extendido</h3>
-                    <span style="color: #27ae60; font-size: 0.9rem;">Actualizado hace 15 min</span>
+                    <span style="color: var(--success-color); font-size: 0.9rem;">Actualizado hace 15 min</span>
                 </div>
 
                 <div class="forecast-grid">
@@ -708,11 +684,11 @@
                     <h4 style="margin-bottom: 0.5rem;">💡 Recomendación Inteligente</h4>
                     <p>Suspenda el riego mañana por la lluvia esperada. Ahorro estimado: $125 USD</p>
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
 
         <!-- Sección de Alertas -->
-        <div class="alerts-section">
+        <section class="card alerts-section">
             <!-- Panel de Alertas Mejorado -->
             <div class="alerts-panel">
                 <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; position: relative;">
@@ -753,12 +729,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Sección de Mejoras y Noticias -->
-        <div class="improvement-section">
+        <section class="improvement-section">
             <!-- Métricas de Mejora -->
-            <div class="improvement-metrics">
+            <div class="card improvement-metrics">
                 <div class="metrics-header">
                     📈 Recuento de Mejoras - Últimos 30 Días
                 </div>
@@ -791,7 +767,7 @@
             </div>
 
             <!-- Noticias y Actualizaciones -->
-            <div class="news-section">
+            <div class="card news-section">
                 <div class="news-header">
                     📰 Noticias Agrícolas
                 </div>
@@ -836,11 +812,11 @@
                     <div class="news-date">Hace 3 días</div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Análisis Predictivo Avanzado -->
-        <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);">
-            <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.8rem; text-align: center;">
+        <section class="card">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem; text-align: center;">
                 🤖 Análisis Predictivo con IA
             </h3>
             
@@ -888,11 +864,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Dashboard de Recursos Hídricos -->
-        <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);">
-            <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.8rem; display: flex; align-items: center; gap: 0.5rem;">
+        <section class="card">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem; display: flex; align-items: center; gap: 0.5rem;">
                 💧 Gestión Inteligente del Agua
             </h3>
             
