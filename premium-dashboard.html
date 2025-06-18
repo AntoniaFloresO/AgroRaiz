@@ -896,30 +896,30 @@
             </div>
 
             <div style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; padding: 2rem;">
-                <h4 style="color: #2c3e50; margin-bottom: 1rem;">📈 Programación de Riego Inteligente</h4>
+                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">📈 Programación de Riego Inteligente</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                     <div style="text-align: center; padding: 1rem; background: rgba(116, 185, 255, 0.1); border-radius: 10px;">
-                        <div style="font-weight: bold; color: #2c3e50;">Próximo Riego</div>
+                        <div style="font-weight: bold; color: var(--primary-color);">Próximo Riego</div>
                         <div style="font-size: 1.2rem; color: #74b9ff; margin: 0.5rem 0;">Mañana 6:00 AM</div>
-                        <div style="font-size: 0.9rem; color: #7f8c8d;">Zona A, B, D</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">Zona A, B, D</div>
                     </div>
                     <div style="text-align: center; padding: 1rem; background: rgba(231, 76, 60, 0.1); border-radius: 10px;">
-                        <div style="font-weight: bold; color: #2c3e50;">Riego Urgente</div>
+                        <div style="font-weight: bold; color: var(--primary-color);">Riego Urgente</div>
                         <div style="font-size: 1.2rem; color: #e74c3c; margin: 0.5rem 0;">Hoy 16:00</div>
-                        <div style="font-size: 0.9rem; color: #7f8c8d;">Zona C - Crítica</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">Zona C - Crítica</div>
                     </div>
                     <div style="text-align: center; padding: 1rem; background: rgba(0, 184, 148, 0.1); border-radius: 10px;">
-                        <div style="font-weight: bold; color: #2c3e50;">Suspendido</div>
+                        <div style="font-weight: bold; color: var(--primary-color);">Suspendido</div>
                         <div style="font-size: 1.2rem; color: #00b894; margin: 0.5rem 0;">Mañana PM</div>
-                        <div style="font-size: 0.9rem; color: #7f8c8d;">Lluvia esperada</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">Lluvia esperada</div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Panel de Control Automatizado -->
-        <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);">
-            <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.8rem; display: flex; align-items: center; gap: 0.5rem;">
+        <section class="card">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem; display: flex; align-items: center; gap: 0.5rem;">
                 🎛️ Centro de Control Automatizado
             </h3>
             
@@ -979,42 +979,39 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
+        // Función para cambiar la vista del mapa satelital
         function changeView(viewType) {
-            const buttons = document.querySelectorAll('.control-btn');
+            const buttons = document.querySelectorAll('.btn-primary');
             const map = document.getElementById('satelliteMap');
             
-            // Remove active class from all buttons
-            buttons.forEach(btn => btn.classList.remove('active'));
+            // Remover clase active de todos los botones
+            buttons.forEach(btn => btn.classList.remove('btn-active'));
             
-            // Add active class to clicked button
-            event.target.classList.add('active');
+            // Agregar clase active al botón clickeado
+            event.target.classList.add('btn-active');
             
-            // Change map background based on view type
-            switch(viewType) {
-                case 'ndvi':
-                    map.style.background = 'linear-gradient(45deg, #228B22 0%, #32CD32 25%, #90EE90 50%, #ADFF2F 75%, #9ACD32 100%)';
-                    break;
-                case 'rgb':
-                    map.style.background = 'linear-gradient(45deg, #8FBC8F 0%, #90EE90 25%, #98FB98 50%, #F0FFF0 75%, #F5FFFA 100%)';
-                    break;
-                case 'thermal':
-                    map.style.background = 'linear-gradient(45deg, #FF4500 0%, #FF6347 25%, #FFD700 50%, #FFFF00 75%, #ADFF2F 100%)';
-                    break;
-                case 'moisture':
-                    map.style.background = 'linear-gradient(45deg, #4169E1 0%, #1E90FF 25%, #00BFFF 50%, #87CEEB 75%, #B0E0E6 100%)';
-                    break;
-            }
+            // Cambiar el fondo del mapa según el tipo de vista
+            const viewBackgrounds = {
+                'ndvi': 'linear-gradient(45deg, #228B22 0%, #32CD32 25%, #90EE90 50%, #ADFF2F 75%, #9ACD32 100%)',
+                'rgb': 'linear-gradient(45deg, #8FBC8F 0%, #90EE90 25%, #98FB98 50%, #F0FFF0 75%, #F5FFFA 100%)',
+                'thermal': 'linear-gradient(45deg, #FF4500 0%, #FF6347 25%, #FFD700 50%, #FFFF00 75%, #ADFF2F 100%)',
+                'moisture': 'linear-gradient(45deg, #4169E1 0%, #1E90FF 25%, #00BFFF 50%, #87CEEB 75%, #B0E0E6 100%)'
+            };
+            
+            map.style.background = viewBackgrounds[viewType] || viewBackgrounds['ndvi'];
         }
         
+        // Función para seleccionar una zona
         function selectZone(zone) {
-            alert(`Zona ${zone} seleccionada. Mostrando datos detallados...`);
+            console.log(`Zona ${zone} seleccionada. Mostrando datos detallados...`);
+            // Aquí iría la lógica para mostrar detalles de la zona
         }
         
-        // Simular actualizaciones en tiempo real
+        // Simular actualizaciones en tiempo real de los puntos de riego
         setInterval(() => {
             const irrigationPoints = document.querySelectorAll('.irrigation-points');
             irrigationPoints.forEach(point => {
@@ -1031,9 +1028,19 @@
                     const variation = (Math.random() - 0.5) * 2;
                     const newValue = Math.max(0, Math.min(100, currentValue + variation));
                     metric.textContent = newValue.toFixed(0) + '%';
+                } else if (metric.textContent.includes('°C')) {
+                    const currentValue = parseFloat(metric.textContent);
+                    const variation = (Math.random() - 0.5) * 2;
+                    const newValue = Math.max(15, Math.min(35, currentValue + variation));
+                    metric.textContent = newValue.toFixed(1) + '°C';
                 }
             });
         }, 30000);
+
+        // Inicialización de componentes
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Dashboard AgroSmart Pro cargado correctamente');
+        });
     </script>
 </body>
 </html>
