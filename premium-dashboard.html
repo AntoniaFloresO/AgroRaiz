@@ -1,3 +1,34 @@
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="Sistema de monitoreo satelital avanzado para agricultura sostenible - PRVLR"> <title>AgroSmart Pro - PRVLR | A
+
+pasted
+
+Puedes mejorar y corregir este EXTRACTO de código html. de una página web (Si no vez muchos errores entonces pasalo por alto):
+
+Editar
+Revisando tu código HTML, veo que está bastante bien estructurado, pero hay algunas mejoras importantes que puedo aplicar. El código se corta abruptamente y tiene algunos problemas menores de CSS. Te ayudo a completarlo y optimizarlo:
+
+
+AgroSmart Pro - Página Mejorada
+Artefacto interactivo 
+He mejorado significativamente tu código HTML con las siguientes correcciones y mejoras:
+
+Principales mejoras aplicadas:
+1. Estructura HTML Completa
+Completé todo el HTML faltante (body, contenido, footer)
+Agregué semántica HTML5 apropiada (<header>, <footer>, <main>)
+2. Correcciones de CSS
+Eliminé la regla composes que no es CSS estándar
+Mejoré la responsividad con media queries más completas
+Corregí la herencia de estilos de .card en .header
+Añadí text-decoration: none a los botones para enlaces
+3. Mejoras de Accesibilidad
+**
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -76,6 +107,7 @@
             text-align: center;
             font-size: 1rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
         }
 
         .btn-primary {
@@ -95,16 +127,21 @@
 
         .btn-earth {
             background: linear-gradient(45deg, var(--earth-color), #a67c52);
+            color: var(--white);
         }
 
         /* Header mejorado */
         .header {
-            composes: card;
             text-align: center;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.98));
             padding: 3rem 2rem;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .header::before {
@@ -154,6 +191,12 @@
             margin-bottom: 2.5rem;
         }
 
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Sección Satelital mejorada */
         .satellite-section {
             position: relative;
@@ -164,6 +207,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .satellite-header h2 {
@@ -396,6 +441,8 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .weather-header h3 {
@@ -690,11 +737,14 @@
         }
 
         .control-panel {
-            composes: card;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
             padding: 2rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .control-panel::before {
@@ -743,66 +793,286 @@
             font-size: 1rem;
             cursor: pointer;
             flex: 1;
+            user-select: none;
         }
 
-        /* Sección de deforestación */
-        .deforestation-counter {
-            background: linear-gradient(135deg, #d35400, #e67e22);
-            color: white;
-            border-radius: 18px;
+        /* Grid principal */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
             padding: 2rem;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(211, 84, 0, 0.2);
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        /* Sección satelital mejorada */
+        .satellite-section {
             position: relative;
-            overflow: hidden;
         }
 
-        .deforestation-counter::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
-            opacity: 0.3;
-        }
-
-        .deforestation-counter h3 {
-            font-size: 1.8rem;
+        .satellite-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .satellite-header h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
         }
 
-        .counter-value {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .status-badge {
+            background: var(--success-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: pulse 2s infinite;
         }
 
-        .counter-label {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .status-badge::before {
+            content: "●";
+            font-size: 0.8rem;
+        }
+
+        .satellite-controls {
+            display: flex;
+            gap: 0.8rem;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .counter-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
+        .btn {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-earth {
+            background: var(--earth-color);
+            color: white;
+        }
+
+        .btn-earth:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-active {
+            background: var(--warning-color) !important;
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Vista satelital mejorada */
+        .satellite-view {
+            background: #1a1a1a;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            height: 500px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .satellite-map {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(45deg, #2c5f2d 25%, #234a24 25%, #234a24 50%, #2c5f2d 50%, #2c5f2d 75%, #234a24 75%, #234a24);
+            background-size: 40px 40px;
+            animation: mapAnimation 20s linear infinite;
+        }
+
+        @keyframes mapAnimation {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        .field-zones {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .zone {
+            position: absolute;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            font-size: 0.85rem;
+        }
+
+        .zone:hover {
+            transform: scale(1.05);
+            border-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .zone-a {
+            top: 20%;
+            left: 15%;
+            background: rgba(39, 174, 96, 0.8);
+            color: white;
+        }
+
+        .zone-b {
+            top: 15%;
+            right: 20%;
+            background: rgba(243, 156, 18, 0.8);
+            color: white;
+        }
+
+        .zone-c {
+            bottom: 25%;
+            left: 20%;
+            background: rgba(231, 76, 60, 0.8);
+            color: white;
+        }
+
+        .zone-d {
+            bottom: 20%;
+            right: 15%;
+            background: rgba(52, 152, 219, 0.8);
+            color: white;
+        }
+
+        .irrigation-points {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #00bcd4;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00bcd4;
+            animation: ping 2s infinite;
+        }
+
+        @keyframes ping {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.5);
+            }
+        }
+
+        .irrigation-1 { top: 30%; left: 40%; }
+        .irrigation-2 { top: 50%; right: 30%; }
+        .irrigation-3 { bottom: 40%; left: 35%; }
+        .irrigation-4 { bottom: 35%; right: 40%; }
+
+        .deforestation-alert {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            animation: alert 1s infinite alternate;
+            cursor: pointer;
+        }
+
+        @keyframes alert {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); box-shadow: 0 0 15px var(--danger-color); }
+        }
+
+        .alert-1 { top: 10%; left: 60%; }
+        .alert-2 { bottom: 15%; left: 70%; }
+
+        /* Métricas satelitales */
+        .satellite-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .metric-item:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
         }
 
         /* Responsive Design mejorado */
         @media (max-width: 1400px) {
-            .container {
-                padding: 25px;
-            }
+            .container { padding: 25px; }
         }
 
         @media (max-width: 1200px) {
@@ -810,38 +1080,22 @@
                 grid-template-columns: 1fr;
             }
             
-            .improvement-section {
-                grid-template-columns: 1fr;
+            .advanced-controls {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
             
-            .satellite-view {
-                height: 450px;
-            }
+            .satellite-view { height: 450px; }
         }
 
         @media (max-width: 992px) {
-            .header h1 {
-                font-size: 2.3rem;
-            }
-            
-            .header p {
-                font-size: 1.1rem;
-            }
-            
-            .metrics-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .header h1 { font-size: 2.3rem; }
+            .header p { font-size: 1.1rem; }
+            .counter-value { font-size: 3rem; }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .header {
-                padding: 2rem 1.5rem;
-            }
-            
+            .container { padding: 20px; }
+            .header { padding: 2rem 1.5rem; }
             .header h1 {
                 font-size: 2rem;
                 flex-direction: column;
@@ -853,50 +1107,61 @@
                 gap: 0.8rem;
             }
             
-            .btn {
-                width: 100%;
-                padding: 0.8rem;
-            }
-            
-            .satellite-view {
-                height: 400px;
-            }
-            
-            .forecast-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-            
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
+            .btn { width: 100%; justify-content: center; }
+            .satellite-view { height: 400px; }
+            .advanced-controls { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 576px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            .satellite-header, .weather-header {
+            .header h1 { font-size: 1.8rem; }
+            .counter-value { font-size: 2.5rem; }
+            .satellite-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-            
-            .status-badge, .update-time {
-                align-self: flex-start;
-            }
-            
-            .satellite-metrics {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .forecast-day {
-                padding: 1.5rem 0.5rem;
-            }
+            .satellite-metrics { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Nuevas animaciones y efectos */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
         }
     </style>
 </head>
@@ -905,16 +1170,18 @@
         <!-- Header mejorado -->
         <header class="header">
             <h1>
-                <span>🛰️ AgroSmart Pro</span>
+                <span><i class="fas fa-satellite-dish"></i> AgroSmart Pro</span>
                 <span style="font-size: 0.7em; color: var(--earth-color);">PRVLR Edition</span>
             </h1>
             <p>Tecnología satelital para una agricultura sostenible que protege nuestros bosques</p>
-            <div class="prvlr-badge">Solución certificada contra la deforestación</div>
+            <div class="prvlr-badge">
+                <i class="fas fa-leaf"></i> Solución certificada contra la deforestación
+            </div>
         </header>
 
-        <!-- Contador de deforestación -->
+        <!-- Contador de deforestación mejorado -->
         <section class="deforestation-counter">
-            <h3>🌍 Impacto de la Deforestación Global</h3>
+            <h3><i class="fas fa-globe-americas"></i> Impacto de la Deforestación Global</h3>
             <div class="counter-value" id="deforestationCounter">0 Ha</div>
             <div class="counter-label">de bosques perdidos desde que abriste esta página</div>
             <div class="counter-description">
@@ -925,7 +1192,7 @@
         <!-- Controles Avanzados mejorados -->
         <div class="advanced-controls">
             <div class="control-panel">
-                <h4>🛰️ Capas Satelitales</h4>
+                <h4><i class="fas fa-satellite"></i> Capas Satelitales</h4>
                 <div class="control-option">
                     <input type="checkbox" id="ndvi" checked>
                     <label for="ndvi">NDVI (Índice de Vegetación)</label>
@@ -949,7 +1216,7 @@
             </div>
 
             <div class="control-panel">
-                <h4>📊 Análisis PRVLR</h4>
+                <h4><i class="fas fa-chart-line"></i> Análisis PRVLR</h4>
                 <div class="control-option">
                     <input type="checkbox" id="zones" checked>
                     <label for="zones">Zonas de Manejo</label>
@@ -973,7 +1240,7 @@
             </div>
 
             <div class="control-panel">
-                <h4>🕐 Período Temporal</h4>
+                <h4><i class="fas fa-clock"></i> Período Temporal</h4>
                 <div class="control-option">
                     <input type="radio" name="period" id="week" checked>
                     <label for="week">Última Semana</label>
@@ -997,128 +1264,139 @@
             </div>
         </div>
 
-        <!-- Grid Principal mejorado -->
+        <!-- Grid Principal -->
         <main class="main-grid">
             <!-- Sección de Monitoreo Satelital mejorada -->
             <section class="card satellite-section">
                 <div class="satellite-header">
-                    <h2>🛰️ Monitoreo Satelital PRVLR</h2>
-                    <div class="status-badge">ACTIVO</div>
+                    <h2><i class="fas fa-satellite-dish"></i> Monitoreo Satelital PRVLR</h2>
+                    <div class="status-badge tooltip" data-tooltip="Sistema funcionando correctamente">
+                        <i class="fas fa-signal"></i> ACTIVO
+                    </div>
                 </div>
 
                 <div class="satellite-controls">
-                    <button class="btn btn-primary btn-active" onclick="changeView('ndvi')">NDVI</button>
-                    <button class="btn btn-primary" onclick="changeView('rgb')">RGB Natural</button>
-                    <button class="btn btn-primary" onclick="changeView('thermal')">Térmico</button>
-                    <button class="btn btn-primary" onclick="changeView('moisture')">Humedad</button>
-                    <button class="btn btn-earth" onclick="changeView('deforestation')">Impacto Forestal</button>
+                    <button class="btn btn-primary btn-active" onclick="changeView('ndvi')">
+                        <i class="fas fa-leaf"></i> NDVI
+                    </button>
+                    <button class="btn btn-primary" onclick="changeView('rgb')">
+                        <i class="fas fa-eye"></i> RGB Natural
+                    </button>
+                    <button class="btn btn-primary" onclick="changeView('thermal')">
+                        <i class="fas fa-thermometer-half"></i> Térmico
+                    </button>
+                    <button class="btn btn-primary" onclick="changeView('moisture')">
+                        <i class="fas fa-tint"></i> Humedad
+                    </button>
+                    <button class="btn btn-earth" onclick="changeView('deforestation')">
+                        <i class="fas fa-tree"></i> Impacto Forestal
+                    </button>
                 </div>
 
                 <div class="satellite-view">
                     <div class="satellite-map" id="satelliteMap">
                         <div class="field-zones">
-                            <div class="zone zone-a" onclick="selectZone('A')">
-                                ZONA A<br>
+                            <div class="zone zone-a tooltip" data-tooltip="Zona óptima - 95% eficiencia" onclick="selectZone('A')">
+                                <i class="fas fa-check-circle"></i> ZONA A<br>
                                 <small>Excelente - Sostenible</small>
                             </div>
-                            <div class="zone zone-b" onclick="selectZone('B')">
-                                ZONA B<br>
+                            <div class="zone zone-b tooltip" data-tooltip="Requiere atención - 78% eficiencia" onclick="selectZone('B')">
+                                <i class="fas fa-exclamation-triangle"></i> ZONA B<br>
                                 <small>Atención - Mejorable</small>
                             </div>
-                            <div class="zone zone-c" onclick="selectZone('C')">
-                                ZONA C<br>
+                            <div class="zone zone-c tooltip" data-tooltip="Crítica - 45% eficiencia" onclick="selectZone('C')">
+                                <i class="fas fa-times-circle"></i> ZONA C<br>
                                 <small>Crítica - Prioridad PRVLR</small>
                             </div>
-                            <div class="zone zone-d" onclick="selectZone('D')">
-                                ZONA D<br>
+                            <div class="zone zone-d tooltip" data-tooltip="En mejora - 82% eficiencia" onclick="selectZone('D')">
+                                <i class="fas fa-arrow-up"></i> ZONA D<br>
                                 <small>Buena - En transición</small>
                             </div>
-                            <div class="irrigation-points irrigation-1"></div>
-                            <div class="irrigation-points irrigation-2"></div>
-                            <div class="irrigation-points irrigation-3"></div>
-                            <div class="irrigation-points irrigation-4"></div>
-                            <div class="deforestation-alert alert-1">!</div>
-                            <div class="deforestation-alert alert-2">!</div>
+                            <div class="irrigation-points irrigation-1 tooltip" data-tooltip="Sistema de riego activo"></div>
+                            <div class="irrigation-points irrigation-2 tooltip" data-tooltip="Sistema de riego activo"></div>
+                            <div class="irrigation-points irrigation-3 tooltip" data-tooltip="Sistema de riego activo"></div>
+                            <div class="irrigation-points irrigation-4 tooltip" data-tooltip="Sistema de riego activo"></div>
+                            <div class="deforestation-alert alert-1 tooltip" data-tooltip="Alerta de deforestación detectada" onclick="showAlert('1')">!</div>
+                            <div class="deforestation-alert alert-2 tooltip" data-tooltip="Alerta de deforestación detectada" onclick="showAlert('2')">!</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="satellite-metrics">
-                    <div class="metric-card">
-                        <div class="metric-value">0.82</div>
-                        <div class="metric-label">NDVI Promedio</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">48%</div>
-                        <div class="metric-label">Humedad Suelo</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">26°C</div>
-                        <div class="metric-label">Temp. Superficie</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">92%</div>
-                        <div class="metric-label">Cobertura</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">18.5 Ha</div>
-                        <div class="metric-label">Área Protegida</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">98%</div>
-                        <div class="metric-label">Eficiencia PRVLR</div>
-                    </div>
+                <div class="metric-card">
+                    <div class="metric-value">0.82</div>
+                    <div class="metric-label">NDVI Promedio</div>
                 </div>
-            </section>
-
-            <!-- Pronóstico del Tiempo mejorado -->
-            <section class="card weather-forecast">
-                <div class="weather-header">
-                    <h3>🌤️ Pronóstico Climático</h3>
-                    <div class="update-time">Actualizado hace 12 min</div>
+                <div class="metric-card">
+                    <div class="metric-value">48%</div>
+                    <div class="metric-label">Humedad Suelo</div>
                 </div>
-
-                <div class="forecast-grid">
-                    <div class="forecast-day">
-                        <div class="day">HOY</div>
-                        <div class="weather-icon">☀️</div>
-                        <div class="temp">32° / 18°</div>
-                        <div class="rain">0% lluvia</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="day">MAÑ</div>
-                        <div class="weather-icon">🌧️</div>
-                        <div class="temp">28° / 16°</div>
-                        <div class="rain">85% lluvia</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="day">MIÉ</div>
-                        <div class="weather-icon">⛅</div>
-                        <div class="temp">30° / 17°</div>
-                        <div class="rain">25% lluvia</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="day">JUE</div>
-                        <div class="weather-icon">☀️</div>
-                        <div class="temp">33° / 19°</div>
-                        <div class="rain">5% lluvia</div>
-                    </div>
-                    <div class="forecast-day">
-                        <div class="day">VIE</div>
-                        <div class="weather-icon">🌤️</div>
-                        <div class="temp">31° / 18°</div>
-                        <div class="rain">15% lluvia</div>
-                    </div>
+                <div class="metric-card">
+                    <div class="metric-value">26°C</div>
+                    <div class="metric-label">Temp. Superficie</div>
                 </div>
-
-                <div class="recommendation-box">
-                    <h4>💡 Recomendación PRVLR</h4>
-                    <p>Suspenda el riego mañana por la lluvia esperada. Ahorro estimado: 125,000 litros de agua ($150 USD)</p>
+                <div class="metric-card">
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">Cobertura</div>
                 </div>
-            </section>
-        </main>
+                <div class="metric-card">
+                    <div class="metric-value">18.5 Ha</div>
+                    <div class="metric-label">Área Protegida</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">98%</div>
+                    <div class="metric-label">Eficiencia PRVLR</div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Sección de Alertas mejorada -->
+        <!-- Pronóstico del Tiempo -->
+        <section class="card weather-forecast">
+            <div class="weather-header">
+                <h3>🌤️ Pronóstico Climático</h3>
+                <div class="update-time">Actualizado hace 12 min</div>
+            </div>
+
+            <div class="forecast-grid">
+                <div class="forecast-day">
+                    <div class="day">HOY</div>
+                    <div class="weather-icon">☀️</div>
+                    <div class="temp">32° / 18°</div>
+                    <div class="rain">0% lluvia</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="day">MAÑ</div>
+                    <div class="weather-icon">🌧️</div>
+                    <div class="temp">28° / 16°</div>
+                    <div class="rain">85% lluvia</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="day">MIÉ</div>
+                    <div class="weather-icon">⛅</div>
+                    <div class="temp">30° / 17°</div>
+                    <div class="rain">25% lluvia</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="day">JUE</div>
+                    <div class="weather-icon">☀️</div>
+                    <div class="temp">33° / 19°</div>
+                    <div class="rain">5% lluvia</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="day">VIE</div>
+                    <div class="weather-icon">🌤️</div>
+                    <div class="temp">31° / 18°</div>
+                    <div class="rain">15% lluvia</div>
+                </div>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>💡 Recomendación PRVLR</h4>
+                <p>Suspenda el riego mañana por la lluvia esperada. Ahorro estimado: 125,000 litros de agua ($150 USD)</p>
+            </div>
+        </section>
+
+        <!-- Sección de Alertas -->
         <section class="card alerts-section">
             <div class="alerts-panel">
                 <h3>
@@ -1173,9 +1451,9 @@
             </div>
         </section>
 
-        <!-- Sección de Mejoras y Noticias mejorada -->
+        <!-- Sección de Mejoras y Noticias -->
         <section class="improvement-section">
-            <!-- Métricas de Mejora mejoradas -->
+            <!-- Métricas de Mejora -->
             <div class="card improvement-metrics">
                 <div class="metrics-header">
                     📈 Impacto PRVLR - Últimos 30 Días
@@ -1208,7 +1486,7 @@
                 </div>
             </div>
 
-            <!-- Noticias y Actualizaciones mejoradas -->
+            <!-- Noticias y Actualizaciones -->
             <div class="card news-section">
                 <div class="news-header">
                     📰 Noticias Sostenibles
@@ -1248,7 +1526,7 @@
             </div>
         </section>
 
-        <!-- Análisis Predictivo Avanzado mejorado -->
+        <!-- Análisis Predictivo Avanzado -->
         <section class="card">
             <h3 style="color: var(--primary-color); margin-bottom: 2rem; font-size: 1.8rem; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px;">
                 🤖 Análisis Predictivo PRVLR
@@ -1270,259 +1548,4 @@
                     </div>
                 </div>
 
-                <div style="background: linear-gradient(135deg, #fd79a8, #fdcb6e); color: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(253, 121, 168, 0.3);">
-                    <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">⚡ Optimización de Recursos</h4>
-                    <div style="font-size: 3rem; font-weight: bold; margin-bottom: 0.8rem;">-38%</div>
-                    <div style="opacity: 0.9; margin-bottom: 1.5rem; font-size: 1.1rem;">Reducción en consumo energético y agua</div>
-                    <div style="background: rgba(255, 255, 255, 0.2); padding: 1.5rem; border-radius: 15px;">
-                        <div style="font-size: 1rem; margin-bottom: 0.8rem;">Ahorro mensual: $620 USD</div>
-                        <div style="font-size: 0.95rem; line-height: 1.6;">
-                            • Riego inteligente: 520,000 litros<br>
-                            • Iluminación LED: 1,200 kWh<br>
-                            • Sistemas automatizados: 45 horas trabajo<br>
-                            • Reducción fertilizantes: 120 kg
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: linear-gradient(135deg, #00b894, #55efc4); color: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3);">
-                    <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">🌱 Impacto Ambiental</h4>
-                    <div style="font-size: 3rem; font-weight: bold; margin-bottom: 0.8rem;">8.2 Ha</div>
-                    <div style="opacity: 0.9; margin-bottom: 1.5rem; font-size: 1.1rem;">Bosque protegido este año</div>
-                    <div style="background: rgba(255, 255, 255, 0.2); padding: 1.5rem; border-radius: 15px;">
-                        <div style="font-size: 1rem; margin-bottom: 0.8rem;">Equivalente a:</div>
-                        <div style="font-size: 0.95rem; line-height: 1.6;">
-                            • 12 canchas de fútbol<br>
-                            • 1,640 árboles adultos<br>
-                            • Absorción de 98 ton CO2/año<br>
-                            • Hábitat para 45 especies
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dashboard de Recursos Hídricos mejorado -->
-        <section class="card">
-            <h3 style="color: var(--primary-color); margin-bottom: 2rem; font-size: 1.8rem; display: flex; align-items: center; gap: 10px;">
-                💧 Gestión Sostenible del Agua PRVLR
-            </h3>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                <div style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border-radius: 18px; padding: 2rem; text-align: center; box-shadow: 0 8px 25px rgba(116, 185, 255, 0.3);">
-                    <div style="font-size: 2.2rem; font-weight: bold;">1,120 L</div>
-                    <div style="opacity: 0.9; font-size: 1.1rem;">Consumo Diario</div>
-                    <div style="font-size: 0.95rem; margin-top: 0.8rem; background: rgba(255, 255, 255, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px;">↓ 22% vs semana pasada</div>
-                </div>
-                <div style="background: linear-gradient(135deg, #00cec9, #00b894); color: white; border-radius: 18px; padding: 2rem; text-align: center; box-shadow: 0 8px 25px rgba(0, 206, 201, 0.3);">
-                    <div style="font-size: 2.2rem; font-weight: bold;">82%</div>
-                    <div style="opacity: 0.9; font-size: 1.1rem;">Eficiencia de Riego</div>
-                    <div style="font-size: 0.95rem; margin-top: 0.8rem; background: rgba(255, 255, 255, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px;">↑ 15% mejora mensual</div>
-                </div>
-                <div style="background: linear-gradient(135deg, #a29bfe, #6c5ce7); color: white; border-radius: 18px; padding: 2rem; text-align: center; box-shadow: 0 8px 25px rgba(162, 155, 254, 0.3);">
-                    <div style="font-size: 2.2rem; font-weight: bold;">45%</div>
-                    <div style="opacity: 0.9; font-size: 1.1rem;">Humedad Óptima</div>
-                    <div style="font-size: 0.95rem; margin-top: 0.8rem; background: rgba(255, 255, 255, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px;">Nivel ideal alcanzado</div>
-                </div>
-                <div style="background: linear-gradient(135deg, #fd79a8, #e84393); color: white; border-radius: 18px; padding: 2rem; text-align: center; box-shadow: 0 8px 25px rgba(253, 121, 168, 0.3);">
-                    <div style="font-size: 2.2rem; font-weight: bold;">$150</div>
-                    <div style="opacity: 0.9; font-size: 1.1rem;">Ahorro Semanal</div>
-                    <div style="font-size: 0.95rem; margin-top: 0.8rem; background: rgba(255, 255, 255, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px;">+18% eficiencia</div>
-                </div>
-            </div>
-
-            <div style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; padding: 2.5rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);">
-                <h4 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">📈 Programación de Riego Inteligente</h4>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
-                    <div style="text-align: center; padding: 1.5rem; background: rgba(116, 185, 255, 0.1); border-radius: 15px; transition: var(--transition);">
-                        <div style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">Próximo Riego</div>
-                        <div style="font-size: 1.5rem; color: #74b9ff; margin: 1rem 0;">Mañana 6:00 AM</div>
-                        <div style="font-size: 1rem; color: var(--text-light);">Zona A, B, D</div>
-                        <div style="font-size: 0.9rem; margin-top: 0.8rem; color: #74b9ff;">320,000 litros estimados</div>
-                    </div>
-                    <div style="text-align: center; padding: 1.5rem; background: rgba(231, 76, 60, 0.1); border-radius: 15px; transition: var(--transition);">
-                        <div style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">Riego Urgente</div>
-                        <div style="font-size: 1.5rem; color: #e74c3c; margin: 1rem 0;">Hoy 16:00</div>
-                        <div style="font-size: 1rem; color: var(--text-light);">Zona C - Crítica</div>
-                        <div style="font-size: 0.9rem; margin-top: 0.8rem; color: #e74c3c;">85,000 litros estimados</div>
-                    </div>
-                    <div style="text-align: center; padding: 1.5rem; background: rgba(0, 184, 148, 0.1); border-radius: 15px; transition: var(--transition);">
-                        <div style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">Suspendido</div>
-                        <div style="font-size: 1.5rem; color: #00b894; margin: 1rem 0;">Mañana PM</div>
-                        <div style="font-size: 1rem; color: var(--text-light);">Lluvia esperada</div>
-                        <div style="font-size: 0.9rem; margin-top: 0.8rem; color: #00b894;">Ahorro: 180,000 litros</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Panel de Control Automatizado mejorado -->
-        <section class="card">
-            <h3 style="color: var(--primary-color); margin-bottom: 2rem; font-size: 1.8rem; display: flex; align-items: center; gap: 10px;">
-                🎛️ Centro de Control PRVLR
-            </h3>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem;">
-                <div style="background: linear-gradient(135deg, #2d3436, #636e72); color: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(45, 52, 54, 0.3);">
-                    <h4 style="margin-bottom: 2rem; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">🚀 Acciones Automáticas</h4>
-                    <div style="space-y: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: var(--transition);">
-                            <span style="font-size: 1.1rem;">Riego por goteo</span>
-                            <span style="background: #00b894; padding: 0.3rem 1rem; border-radius: 15px; font-size: 0.9rem; font-weight: bold;">ACTIVO</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: var(--transition);">
-                            <span style="font-size: 1.1rem;">Monitor de plagas</span>
-                            <span style="background: #74b9ff; padding: 0.3rem 1rem; border-radius: 15px; font-size: 0.9rem; font-weight: bold;">MONITOREANDO</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: var(--transition);">
-                            <span style="font-size: 1.1rem;">Fertirrigación</span>
-                            <span style="background: #fdcb6e; padding: 0.3rem 1rem; border-radius: 15px; font-size: 0.9rem; font-weight: bold;">PROGRAMADO</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: var(--transition);">
-                            <span style="font-size: 1.1rem;">Monitoreo forestal</span>
-                            <span style="background: #1a5f2a; padding: 0.3rem 1rem; border-radius: 15px; font-size: 0.9rem; font-weight: bold;">ACTIVO</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3);">
-                    <h4 style="margin-bottom: 2rem; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">📊 Estadísticas PRVLR</h4>
-                    <div style="space-y: 1.5rem;">
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 1.1rem;">
-                                <span>Riego ejecutado</span>
-                                <span>3.1 horas</span>
-                            </div>
-                            <div style="background: rgba(255, 255, 255, 0.3); height: 8px; border-radius: 4px;">
-                                <div style="background: white; height: 100%; width: 65%; border-radius: 4px;"></div>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 1.1rem;">
-                                <span>Sensores activos</span>
-                                <span>28/28</span>
-                            </div>
-                            <div style="background: rgba(255, 255, 255, 0.3); height: 8px; border-radius: 4px;">
-                                <div style="background: white; height: 100%; width: 100%; border-radius: 4px;"></div>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 1.1rem;">
-                                <span>Eficiencia global</span>
-                                <span>96%</span>
-                            </div>
-                            <div style="background: rgba(255, 255, 255, 0.3); height: 8px; border-radius: 4px;">
-                                <div style="background: white; height: 100%; width: 96%; border-radius: 4px;"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 1.1rem;">
-                                <span>Área protegida</span>
-                                <span>8.2 Ha</span>
-                            </div>
-                            <div style="background: rgba(255, 255, 255, 0.3); height: 8px; border-radius: 4px;">
-                                <div style="background: white; height: 100%; width: 82%; border-radius: 4px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        // Función para cambiar la vista del mapa satelital mejorada
-        function changeView(viewType) {
-            const buttons = document.querySelectorAll('.satellite-controls .btn');
-            const map = document.getElementById('satelliteMap');
-            
-            // Remover clase active de todos los botones
-            buttons.forEach(btn => btn.classList.remove('btn-active'));
-            
-            // Agregar clase active al botón clickeado
-            event.target.classList.add('btn-active');
-            
-            // Cambiar el fondo del mapa según el tipo de vista
-            const viewBackgrounds = {
-                'ndvi': 'linear-gradient(45deg, #1a5f2a 0%, #3aaf6a 25%, #90EE90 50%, #ADFF2F 75%, #9ACD32 100%)',
-                'rgb': 'linear-gradient(45deg, #8FBC8F 0%, #90EE90 25%, #98FB98 50%, #F0FFF0 75%, #F5FFFA 100%)',
-                'thermal': 'linear-gradient(45deg, #FF4500 0%, #FF6347 25%, #FFD700 50%, #FFFF00 75%, #ADFF2F 100%)',
-                'moisture': 'linear-gradient(45deg, #4169E1 0%, #1E90FF 25%, #00BFFF 50%, #87CEEB 75%, #B0E0E6 100%)',
-                'deforestation': 'linear-gradient(45deg, #8b4513 0%, #a67c52 25%, #d2b48c 50%, #f5deb3 75%, #fff8dc 100%)'
-            };
-            
-            map.style.background = viewBackgrounds[viewType] || viewBackgrounds['ndvi'];
-            
-            // Mostrar/ocultar alertas de deforestación según la vista
-            const alerts = document.querySelectorAll('.deforestation-alert');
-            alerts.forEach(alert => {
-                alert.style.display = viewType === 'deforestation' ? 'flex' : 'none';
-            });
-        }
-        
-        // Función para seleccionar una zona mejorada
-        function selectZone(zone) {
-            const zones = document.querySelectorAll('.zone');
-            zones.forEach(z => z.style.boxShadow = 'none');
-            event.target.style.boxShadow = '0 0 0 4px rgba(255, 255, 255, 0.8)';
-            
-            console.log(`Zona ${zone} seleccionada. Mostrando datos detallados...`);
-            // Aquí iría la lógica para mostrar detalles de la zona
-        }
-        
-        // Contador de deforestación en tiempo real
-        let hectaresLost = 0;
-        const deforestationRate = 20 / 60; // 20 hectáreas por minuto
-        
-        function updateDeforestationCounter() {
-            hectaresLost += deforestationRate;
-            document.getElementById('deforestationCounter').textContent = 
-                `${hectaresLost.toFixed(1)} Ha`;
-        }
-        
-        setInterval(updateDeforestationCounter, 1000);
-        
-        // Simular actualizaciones en tiempo real de los puntos de riego
-        setInterval(() => {
-            const irrigationPoints = document.querySelectorAll('.irrigation-points');
-            irrigationPoints.forEach(point => {
-                point.style.animationDuration = Math.random() * 2 + 1 + 's';
-            });
-        }, 5000);
-        
-        // Actualizar métricas cada 30 segundos (simulado)
-        setInterval(() => {
-            const metrics = document.querySelectorAll('.metric-value');
-            metrics.forEach(metric => {
-                if (metric.textContent.includes('%')) {
-                    const currentValue = parseFloat(metric.textContent);
-                    const variation = (Math.random() - 0.5) * 2;
-                    const newValue = Math.max(0, Math.min(100, currentValue + variation));
-                    metric.textContent = newValue.toFixed(metric.textContent.includes('.') ? 1 : 0) + '%';
-                } else if (metric.textContent.includes('°C')) {
-                    const currentValue = parseFloat(metric.textContent);
-                    const variation = (Math.random() - 0.5) * 1.5;
-                    const newValue = Math.max(15, Math.min(35, currentValue + variation));
-                    metric.textContent = newValue.toFixed(1) + '°C';
-                } else if (metric.textContent.includes('Ha') && !metric.textContent.includes('.')) {
-                    const currentValue = parseFloat(metric.textContent);
-                    const variation = (Math.random() - 0.3) * 0.5;
-                    const newValue = Math.max(0, currentValue + variation);
-                    metric.textContent = newValue.toFixed(1) + ' Ha';
-                }
-            });
-            
-            // Actualizar contador de deforestación en el footer
-            updateDeforestationCounter();
-        }, 30000);
-
-        // Inicialización de componentes
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Dashboard AgroSmart Pro PRVLR cargado correctamente');
-            
-            // Iniciar contador de deforestación
-            updateDeforestationCounter();
-        });
-    </script>
-</body>
-</html>
+                <div style="background: linear-gradient(135deg, #fd79a8, #fdc
